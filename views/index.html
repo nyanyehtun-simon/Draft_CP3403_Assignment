@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Action</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                console.log("document loaded");
+                document.getElementById("demo").innerHTML = "CP3404 Assignment - Programming Product";
+
+                var vartoadd = (("<%= tablet%>").replace(/&lt;/g, "<")).replace(/&gt;/g, ">");
+
+                console.log(
+                    (vartoadd
+                        .replace(/&#34;/g, "\""))
+                );
+
+
+                jsonData = JSON.parse(vartoadd.replace(/&#34;/g, "\""));
+                console.log(jsonData);
+
+                var dataToPlot = [
+                    {
+                        x: [],
+                        y: [],
+                        type: 'bar'
+                    }
+                ];
+
+                jsonData.forEach(function(item){
+                    dataToPlot[0].x.push(item.Name);
+                    dataToPlot[0].y.push(parseInt(item.Age));
+                });
+
+                Plotly.newPlot('table-to-show', dataToPlot);
+
+                var $data = $("#data"),
+                    html = $.parseHTML(vartoadd),
+                    nodeNames = [];
+                $data.append(html);
+            }, 1000);
+
+        }
+    </script>
+</head>
+<body>
+<h1 id="demo"></h1>
+<h1 id="username-text"><%= name%></h1>
+<form method="POST" action="/submit-form" enctype="multipart/form-data">
+    <input type="text" name="name"/>
+    <input type="submit"/>
+    <input type="file" name="upload" multiple>
+</form>
+<div id="data"></div>
+<div id="table-to-show"></div>
+
+</body>
+</html>

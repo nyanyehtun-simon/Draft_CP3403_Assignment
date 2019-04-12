@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for osm-discretize/index.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">osm-discretize/index.js</span></h1>
+    <h2>
+        Statements: <span class="metric">90.24% <small>(74 / 82)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">83.33% <small>(10 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(3 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">90.24% <small>(74 / 82)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">osm-discretize/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2171</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2171</span>
+<span class="cline-any cline-yes">9882</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9882</span>
+<span class="cline-any cline-yes">2169</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2171</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">200</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">952</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">1216</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40000</span>
+<span class="cline-any cline-yes">213</span>
+<span class="cline-any cline-yes">213</span>
+<span class="cline-any cline-yes">429</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">429</span>
+<span class="cline-any cline-yes">222</span>
+<span class="cline-any cline-yes">222</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">213</span>
+<span class="cline-any cline-yes">39787</span>
+<span class="cline-any cline-yes">1740</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38047</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+&nbsp;
+&nbsp;
+var rasterUtil = require('wgs84-raster-util');
+var filter = require('lodash.filter');
+var within = require('turf-within');
+var featurecollection = require('turf-featurecollection');
+var intersectUtil = require('wgs84-intersect-util');
+&nbsp;
+var matchTags = function(tags, tagList) {
+   var matching = [];
+&nbsp;
+   for (var key in tags) {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (tagList.indexOf(key) !== -1) {
+<span class="cstat-no" title="statement not covered" >         matching.push(key);</span>
+      }
+&nbsp;
+      if (tagList.indexOf(tags[key]) !== -1) {
+         matching.push(tags[key]);
+      }
+   }
+&nbsp;
+   return matching;
+};
+&nbsp;
+var osmDiscretize = function(options, featureCollection) {
+   var rasterDimensions = options.rasterDimensions;
+   var bounds = options.bounds;
+   var tagList = options.tagList;
+   var tagWeight = options.tagWeight;
+   var notagIndex = options.tagList.length;
+   var corner = {
+      SW: 0,
+      NW: 1,
+      NE: 2,
+      SE: 3,
+   };
+   var coordinates = bounds.geometry.coordinates[0];
+   var tagIndices = [];
+   var rowBounds = {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+         "type": "Polygon"
+      }
+   };
+   var cellBounds = {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+         "type": "Polygon"
+      }
+   };
+   var boundsSWCorner = {
+      "type": "Feature",
+      "geometry": {
+         "type": "Point",
+         "coordinates": coordinates[corner.SW]
+      },
+      "properties": {}
+   };
+   var boundsNWCorner = {
+      "type": "Feature",
+      "geometry": {
+         "type": "Point",
+         "coordinates": coordinates[corner.NW]
+      },
+      "properties": {}
+   };
+   var boundsNECorner = {
+      "type": "Feature",
+      "geometry": {
+         "type": "Point",
+         "coordinates": coordinates[corner.NE]
+      },
+      "properties": {}
+   };
+   var cellSize = rasterUtil.cellSize(boundsNWCorner.geometry, boundsSWCorner.geometry, rasterDimensions.height);
+   var points = filter(featureCollection.features, {
+      geometry: {
+         type: 'Point'
+      }
+   });
+   var polygons = filter(featureCollection.features, {
+      geometry: {
+         type: 'Polygon'
+      }
+   });
+   var lines = filter(featureCollection.features, {
+      geometry: {
+         type: 'LineString'
+      }
+   });
+&nbsp;
+   var rowPoints;
+   var rowPolygons;
+   var rowLines;
+   var cellBoundGeom;
+   var intersectedPolygons;
+   var pointsWithin;
+   var tagCandidates;
+   var heaviestIndex;
+   var greatestWeight;
+&nbsp;
+   for (var r = 0; r &lt; rasterDimensions.height; r++) {
+      rowBounds.geometry.coordinates = [rasterUtil.rowBounds(boundsNWCorner.geometry, boundsNECorner.geometry, cellSize, r)];
+&nbsp;
+      try {
+         rowPolygons = intersectUtil.intersectPolygons(rowBounds, polygons);
+      } catch (e) {
+<span class="cstat-no" title="statement not covered" >         console.log(e);</span>
+      }
+&nbsp;
+      try {
+         rowPoints = within(featurecollection(points), featurecollection([rowBounds]));
+      } catch (e) {
+<span class="cstat-no" title="statement not covered" >         console.log(e);</span>
+      }
+&nbsp;
+      try {
+         rowLines = intersectUtil.intersectLines(featurecollection([rowBounds]), lines);
+      } catch (e) {
+<span class="cstat-no" title="statement not covered" >         console.log(e);</span>
+      }
+&nbsp;
+      for (var c = 0; c &lt; rasterDimensions.width; c++) {
+         tagCandidates = [];
+         cellBoundGeom = rasterUtil.cellBounds({
+            "coordinates": rowBounds.geometry.coordinates[0][corner.NW]
+         }, {
+            "coordinates": rowBounds.geometry.coordinates[0][corner.SW]
+         }, cellSize, c);
+&nbsp;
+         cellBounds.geometry.coordinates = [cellBoundGeom];
+&nbsp;
+         try {
+            intersectedPolygons = intersectUtil.intersectPolygons(cellBounds, rowPolygons);
+         } catch (e) {
+<span class="cstat-no" title="statement not covered" >            console.log(e);</span>
+         }
+&nbsp;
+         try {
+            pointsWithin = within(rowPoints, featurecollection([cellBounds]));
+         } catch (e) {
+<span class="cstat-no" title="statement not covered" >            console.log(e);</span>
+         }
+         /*jshint loopfunc:true */
+         intersectUtil.intersectLines(featurecollection([cellBounds]), rowLines).forEach(function(line) {
+            tagCandidates = tagCandidates.concat(matchTags(line.properties.tags, tagList));
+         });
+&nbsp;
+         for (var polygonIndex in intersectedPolygons) {
+            tagCandidates = tagCandidates.concat(matchTags(intersectedPolygons[polygonIndex].properties.tags, tagList));
+         }
+&nbsp;
+         for (var pointIndex in pointsWithin.features) {
+            tagCandidates = tagCandidates.concat(matchTags(pointsWithin.features[pointIndex].properties.tags, tagList));
+         }
+&nbsp;
+         if (tagCandidates.length &gt; 1) {
+            greatestWeight = 0;
+            for (var tagIndex = 0; tagIndex &lt; tagCandidates.length; tagIndex++) {
+               <span class="missing-if-branch" title="if path not taken" >I</span>if (tagWeight[tagList.indexOf(tagCandidates[tagIndex])] === "Infinity") {
+<span class="cstat-no" title="statement not covered" >                  heaviestIndex = tagList.indexOf(tagCandidates[tagIndex]);</span>
+<span class="cstat-no" title="statement not covered" >                  break;</span>
+               } else {
+                  if (greatestWeight &lt;= tagWeight[tagList.indexOf(tagCandidates[tagIndex])]) {
+                     greatestWeight = tagWeight[tagList.indexOf(tagCandidates[tagIndex])];
+                     heaviestIndex = tagList.indexOf(tagCandidates[tagIndex]);
+                  }
+               }
+            }
+            tagIndices.push(heaviestIndex);
+         } else if (tagCandidates.length === 1) {
+            tagIndices.push(tagList.indexOf(tagCandidates[0]));
+         } else {
+            tagIndices.push(notagIndex);
+         }
+      }
+   }
+&nbsp;
+   return tagIndices;
+};
+&nbsp;
+/** @module osm-discretize */
+module.exports = osmDiscretize;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Jul 12 2015 14:39:12 GMT-0700 (PDT)</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

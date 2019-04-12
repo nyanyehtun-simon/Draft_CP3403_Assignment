@@ -35,7 +35,7 @@ Notes:
 */
 
 
-InstanceofFrequency: function (Data, Evidence, EvidenceAttribute, Class, ClassifierOutcome) {
+InstanceofFrequency =  function (Data, Evidence, EvidenceAttribute, Class, ClassifierOutcome) {
     var count = 0;
     Data.forEach(function (element) {
         if (element[Evidence] == EvidenceAttribute && element[Class] == ClassifierOutcome) {
@@ -68,7 +68,7 @@ var ProbalityDenominator = function (Data, Evidence, Class, ClassifierOutcome) {
     return count;
 };
 
-var list_to_test_wo_class: {
+var list_to_test_wo_class=  {
     job: 'unemployed',
     marital: 'married',
     education: 'primary',
@@ -110,7 +110,7 @@ var getLikelihood = function (Data, Class, ClassifierOutcome, EvidenceAttributeL
     return total_finalLikelihood;
 };
 
-calculateNormalisedProbability : function (LikelihoodTrue, LikelihoodFalse, ClassifierOutcome) {
+var calculateNormalisedProbability = function (LikelihoodTrue, LikelihoodFalse, ClassifierOutcome) {
     //This function helps to convert from Likelihood ro Probability
     //Yes = True, No = False and vice versa
     if (ClassifierOutcome == true) {

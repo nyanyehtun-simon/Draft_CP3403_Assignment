@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contingency Table List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <script src="https://unpkg.com/react@16.4.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.4.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                console.log("contingency page loaded");
+
+                var vartoadd = (("<%= tablet%>").replace(/&lt;/g, "<")).replace(/&gt;/g, ">");
+
+                console.log(
+                    (vartoadd
+                        .replace(/&#34;/g, "\""))
+                );
+
+                var jsonData = JSON.parse(vartoadd.replace(/&#34;/g, "\""));
+                console.log(jsonData);
+
+            }, 700);
+        }
+    </script>
+</head>
+<body>
+    <H1>These are the contingency table based on the data submited</H1>
+    <h3 id="username-text"><%= name%></h3>
+</body>
+</html>

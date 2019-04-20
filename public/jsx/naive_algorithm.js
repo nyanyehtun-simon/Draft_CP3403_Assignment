@@ -1,4 +1,4 @@
-var Data = [{
+var data = [{
     job: 'unemployed',
     marital: 'married',
     education: 'primary',
@@ -8,7 +8,7 @@ var Data = [{
     contact: 'cellular',
     month: 'oct',
     poutcome: 'unknown',
-    y: 'yes'
+    y: 'no'
 },
 
     {
@@ -36,66 +36,7 @@ Notes:
 LAPLACE ESTIMATOR will be automatically used in all following functions.
 
 */
-module.exports = {
-
-    exportClass: function(Data){
-        var finalColName = Object.keys(Data[0])[Object.keys(Data[0]).length - 1];
-        return finalColName
-    },
-
-    exportClassList: function (Data) {
-        var finalColName = Object.keys(Data[0])[Object.keys(Data[0]).length - 1];
-        var classifierOutcomeList = [];
-        Data.forEach((element) => {
-            classifierOutcome = element[finalColName];
-            classifierOutcomeList.push(classifierOutcome);
-        });
-        return classifierOutcomeList;
-    },
-
-    gatherDataForEvidence: function (Data, Evidence) {
-        var evidenceList = {};
-        var keysOfData = Object.keys(Data[0]);
-        var evidenceAttributeList = {};
-        var anEvidenceAttribute = "";
-
-        var value;
-
-        var classifierOutcomeList;
-        var classCol = "";
-
-        classCol = exportClass(Data);
-        classifierOutcomeList = exportClassList(Data);
-
-        //classifierOutcomeList.forEach((aClass) => {
-
-            keysOfData.forEach((aKey) => {
-                evidenceAttributeList = {};
-                Data.forEach((element) => {
-                    anEvidenceAttribute = (element[aKey]);
-                    evidenceAttributeList[anEvidenceAttribute] = "";
-
-                    value = {};
-                    classifierOutcomeList.forEach((aClass) => {
-                        value[aClass] = ( InstanceofFrequency(Data, aKey, anEvidenceAttribute, classCol, aClass, true)
-                            + "/"
-                            + ProbalityDenominator(Data, aKey, classCol, aClass, true));
-                    });
-
-                    /*
-                    evidenceAttributeList[anEvidenceAttribute]
-                        = InstanceofFrequency(Data, aKey, anEvidenceAttribute, classCol, aClass, true)
-                    + "/"
-                    + ProbalityDenominator(Data, aKey, classCol, aClass, true);
-                    */
-                    evidenceAttributeList[anEvidenceAttribute] = value;
-
-                });
-                evidenceList[aKey] = evidenceAttributeList;
-            });
-            console.log(evidenceList);
-        //});
-    },
+export default {
 
     InstanceofFrequency: function (Data, Evidence, EvidenceAttribute, Class, ClassifierOutcome, laplace) {
         var count = 0;
@@ -161,7 +102,7 @@ module.exports = {
             }
         });
 
-        for (attribute in EvidenceAttributeList) {
+        EvidenceAttributeList.forEach(function(attribute) {
             evidenceAttribute_value = EvidenceAttributeList[attribute];
 
             numerator = InstanceofFrequency(Data, attribute, evidenceAttribute_value, Class, ClassifierOutcome);
@@ -172,8 +113,8 @@ module.exports = {
 
             //console.log(finalLikelihood);
             total_finalLikelihood *= finalLikelihood;
-        }
-        ;
+        });
+
         total_finalLikelihood *= countClass;
         //console.log(total_finalLikelihood);
         return total_finalLikelihood;

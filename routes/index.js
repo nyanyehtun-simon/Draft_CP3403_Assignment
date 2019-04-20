@@ -67,6 +67,7 @@ router.post('/submit-form', (req, res) => {
                 })
                 .then( () => {
                         console.log('Uploaded: ' + file.name);
+                        console.log(addFunction(2));
                     }
                 );
         }, 500);
@@ -78,3 +79,6 @@ router.post('/submit-form', (req, res) => {
     module.exports = {router:router, csvBody:"OK"};
 //}, 600);
 
+var addFunction = function (aNum) {
+    return aNum +1;
+};

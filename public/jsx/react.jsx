@@ -1,3 +1,6 @@
+//import * as naive from "./naive_algorithm"
+import { getValueInput, filterNames } from './filters.js';
+
 // Create a ES6 class component
 class Person extends React.Component {
 
@@ -14,7 +17,8 @@ class Person extends React.Component {
             })
             .then(data => {
                 console.log(data);
-                this.setState({data: JSON.parse(data)})
+                this.setState({data: JSON.parse(data)});
+                getValueInput("Hungggggggggg");
             })
     };
 
@@ -36,7 +40,10 @@ class Person extends React.Component {
         let li = [];
         this.state.data.forEach(instance => {
             console.log(instance);
-          li.push(<li>{instance.job}</li>)
+            var listOfKeys = Object.keys(instance);
+            console.log(listOfKeys);
+            //li.push(<li>{instance.job}</li>);
+            li.push(<li>{instance["job"]}</li>)
         });
         return li;
 
@@ -48,14 +55,14 @@ class Person extends React.Component {
 const element1 = document.getElementById('person1');
 //const element2 = document.getElementById('person2');
 
-setTimeout(() => {
-    // Use the ReactDOM.render to show your component on the browser
-    ReactDOM.render(
-        <Person personNo='1' />, element1
-    )
+// setTimeout(() => {
+// Use the ReactDOM.render to show your component on the browser
+ReactDOM.render(
+    <Person personNo='1'/>, element1
+)
 
 // Use the ReactDOM.render to show your component on the browser
 //     ReactDOM.render(
 //         <Person personNo='2' firstName='Htun' lastName='Nyan'/>, element2
 //     )
-}, 10000);
+// }, 10000);

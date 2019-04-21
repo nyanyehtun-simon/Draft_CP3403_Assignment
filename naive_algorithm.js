@@ -53,7 +53,7 @@ module.exports = {
         return classifierOutcomeList;
     },
 
-    gatherDataForEvidence: function (Data, Evidence) {
+    gatherDataForEvidence: function (Data) {
         var evidenceList = {};
         var keysOfData = Object.keys(Data[0]);
         var evidenceAttributeList = {};

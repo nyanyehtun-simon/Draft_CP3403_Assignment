@@ -1,5 +1,5 @@
 //import * as naive from "./naive_algorithm"
-import { getValueInput, filterNames } from './filters.js';
+//import { getValueInput, filterNames } from './filters.js';
 
 // Create a ES6 class component
 class Person extends React.Component {

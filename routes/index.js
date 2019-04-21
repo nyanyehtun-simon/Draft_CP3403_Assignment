@@ -11,6 +11,7 @@ var csv = require('csvtojson');
 var Collection = require('dstools').Collection;
 
 var csvContent;
+var csvContentJson;
 var csvBody;
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
@@ -67,8 +68,9 @@ router.post('/submit-form', (req, res) => {
 
                     //Using TableIfy:
                     var html = tableify(csvContentJson);
+                    console.log(html);
 
-                    res.render('index', {name: 'Uploaded', tablet: html}, (err, html) => {
+                    res.render('index', {name: 'Uploaded', tablet: csvContent, tableToShow: html}, (err, html) => {
                         //res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent}, (err, html) => {
                         res.status(200).send(html);
                     });
@@ -147,7 +149,8 @@ var gatherDataForEvidence = function (Data) {
     });
     console.log(evidenceList);
     //});
-    return JSON.stringify(evidenceList);
+    //return JSON.stringify(evidenceList);
+    return evidenceList;
 };
 
 var InstanceofFrequency = function (Data, Evidence, EvidenceAttribute, Class, ClassifierOutcome, laplace) {

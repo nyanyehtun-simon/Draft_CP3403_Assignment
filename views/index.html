@@ -31,6 +31,12 @@
                 document.getElementById("demo").innerHTML = "CP3404 Assignment - Programming Product";
 
                 var vartoadd = (("<%= tablet%>").replace(/&lt;/g, "<")).replace(/&gt;/g, ">");
+                var tableToShow = ((("<%= tableToShow%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                console.log(tableToShow);
 
                 console.log(
                     (vartoadd
@@ -49,6 +55,8 @@
                 });
                 dataAttribute.pop();
 
+                $("#example-jquery-app-output").html( tableToShow);
+
                 //Just for testing:
                 /*
                 var data = [
@@ -59,7 +67,7 @@
                     {"title":"12 Angry Men","year":"1957","rating":"9.0"}
                 ];
                 */
-
+                /*
                 var transforms = {
                     "list":{"<>":"ul","html":function(){
                             return($.json2html(dataAttribute,transforms.items));
@@ -83,7 +91,7 @@
                 };
 
                 $("#example-jquery-app-output .list").json2html({},transforms.list);
-
+                */
             }, 700);
         }
         //$("#example-jquery-app-output .list").json2html({},transforms.list);
@@ -113,16 +121,9 @@
     <div id="person1"></div>
     <div id="person2"></div>-->
 
-    <div id="example-jquery-app-output" class="row">
-        <div class="col-sm list">
+    <div id="example-jquery-app-output" class="table"></div>
 
-        </div>
-        <div class="col-sm details">
-
-        </div>
-    </div>
-
-    <table class="table"><tr><th class="array">someArrayOfObjects</th><td class="array"><table><thead><tr><th class="number">a</th><th class="number">b</th><th class="number">c</th></tr></thead><tbody><tr><td class="number">1</td><td class="number">2</td><td class="number">3</td></tr><tr><td class="number">2</td><td class="number">3</td><td class="number">4</td></tr><tr><td class="number">3</td><td class="number">4</td><td class="number">5</td></tr></tbody></table></td></tr><tr><th class="object">someObject</th><td class="object"><table><tr><th class="string">key1</th><td class="string">value1</td></tr><tr><th class="array">someArray</th><td class="array"><table><tbody><tr><td class="string">value2</td></tr><tr><td class="string">value3</td></tr><tr><td class="string">value4</td></tr><tr><td class="string">value5</td></tr></tbody></table></td></tr><tr><th class="array">someArrayOfObjects</th><td class="array"><table><thead><tr><th class="number">key2</th></tr></thead><tbody><tr><td class="number">123</td></tr><tr><td class="number">234</td></tr><tr><td class="number">345</td></tr></tbody></table></td></tr></table></td></tr></table>
+    <!--<table class="table"><tr><th class="array">someArrayOfObjects</th><td class="array"><table><thead><tr><th class="number">a</th><th class="number">b</th><th class="number">c</th></tr></thead><tbody><tr><td class="number">1</td><td class="number">2</td><td class="number">3</td></tr><tr><td class="number">2</td><td class="number">3</td><td class="number">4</td></tr><tr><td class="number">3</td><td class="number">4</td><td class="number">5</td></tr></tbody></table></td></tr><tr><th class="object">someObject</th><td class="object"><table><tr><th class="string">key1</th><td class="string">value1</td></tr><tr><th class="array">someArray</th><td class="array"><table><tbody><tr><td class="string">value2</td></tr><tr><td class="string">value3</td></tr><tr><td class="string">value4</td></tr><tr><td class="string">value5</td></tr></tbody></table></td></tr><tr><th class="array">someArrayOfObjects</th><td class="array"><table><thead><tr><th class="number">key2</th></tr></thead><tbody><tr><td class="number">123</td></tr><tr><td class="number">234</td></tr><tr><td class="number">345</td></tr></tbody></table></td></tr></table></td></tr></table>-->
 
     <!--<script src="jsx/react.jsx" type="text/babel"></script>-->
 

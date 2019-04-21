@@ -105,6 +105,14 @@
 
     <h3 id="username-text"><%= name%></h3>
 
+    <div class="alert alert-warning" role="alert">
+        Dear my CP3406 group, please click
+        <form method="get" action="/download">
+            <button type="submit">here</button>
+        </form>
+         to download test file.
+    </div>
+
     <form method="POST" action="/submit-form" enctype="multipart/form-data">
 
         <input class="btn btn-secondary" type="file" name="upload" multiple>

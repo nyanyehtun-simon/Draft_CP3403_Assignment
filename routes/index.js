@@ -22,7 +22,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 //GET home page.
 router.get('/', function (req, res, next) {
     var table1 = '<h1>HungH1</h1>';
-    res.render('index', {name: 'Waiting', tablet: table1});
+    res.render('index', {name: 'Waiting', tablet: table1, tableToShow: table1});
+});
+
+router.get('/download', function (req, res, next) {
+    var file = './uploads/very_small_sample.csv';
+    res.download(file); // Set disposition and send it.
 });
 
 router.get('/fetch-data', function (req, res, next) {

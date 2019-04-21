@@ -1,4 +1,4 @@
-//var naivebayes = require('../naive_algorithm.js');
+var tableify = require('tableify');
 
 const fs = require('fs');
 const csv_parser = require('csv-parser');
@@ -65,7 +65,10 @@ router.post('/submit-form', (req, res) => {
                     //Render here:
                     csvContentJson = gatherDataForEvidence(csvBody);
 
-                    res.render('index', {name: 'Uploaded', tablet: csvContentJson}, (err, html) => {
+                    //Using TableIfy:
+                    var html = tableify(csvContentJson);
+
+                    res.render('index', {name: 'Uploaded', tablet: html}, (err, html) => {
                         //res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent}, (err, html) => {
                         res.status(200).send(html);
                     });

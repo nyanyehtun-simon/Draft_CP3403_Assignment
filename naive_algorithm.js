@@ -95,6 +95,7 @@ module.exports = {
             });
             console.log(evidenceList);
         //});
+        return JSON.stringify(evidenceList);
     },
 
     InstanceofFrequency: function (Data, Evidence, EvidenceAttribute, Class, ClassifierOutcome, laplace) {

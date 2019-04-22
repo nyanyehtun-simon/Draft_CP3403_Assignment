@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contingency Table List</title>
+    <title>Form Action</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -12,9 +12,12 @@
     <script src="https://unpkg.com/react-dom@16.4.2/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
 
-    <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
-
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -24,24 +27,63 @@
     <script>
         window.onload = function () {
             setTimeout(() => {
-                console.log("contingency page loaded");
+                console.log("document loaded");
+                document.getElementById("demo").innerHTML = "CP3403 Assignment - Programming Product";
 
                 var vartoadd = (("<%= tablet%>").replace(/&lt;/g, "<")).replace(/&gt;/g, ">");
+                var tableToShow = ((("<%= tableToShow%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                console.log(tableToShow);
 
                 console.log(
                     (vartoadd
                         .replace(/&#34;/g, "\""))
                 );
 
-                var jsonData = JSON.parse(vartoadd.replace(/&#34;/g, "\""));
-                console.log(jsonData);
+                var data = JSON.parse(vartoadd.replace(/&#34;/g, "\""));
+                console.log(data);
 
+                var dataAttribute = [];
+
+                Object.keys(data).forEach(function (key) {
+                    dataAttribute.push({
+                        attribute: key
+                    })
+                });
+                dataAttribute.pop();
+
+                $("#example-jquery-app-output").html( tableToShow);
             }, 700);
         }
     </script>
 </head>
 <body>
-    <H1>These are the contingency table based on the data submited</H1>
+
+<div class="container">
+
+    <h1 class="h1" id="demo"></h1>
+
     <h3 id="username-text"><%= name%></h3>
+
+    <div class="alert alert-warning" role="alert">
+        Dear my CP3403 group, please click
+        <form method="get" action="/download">
+            <button type="submit">here</button>
+        </form>
+        to download test file.
+    </div>
+
+    <h2>10 sample data rows from uploaded dataset:</h2>
+    <div id="data"></div>
+    <di class="table" id="sample-table"></di>
+    <div id="table-to-show"></div>
+
+    <div id="example-jquery-app-output" class="table"></div>
+
+</div>
+
 </body>
 </html>

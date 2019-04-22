@@ -1,6 +1,9 @@
 var tableify = require('tableify');
+var discretization = require('discretisation.js');
 
 const fs = require('fs');
+const path = require('path');
+
 const csv_parser = require('csv-parser');
 
 var express = require('express');
@@ -21,12 +24,27 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //GET home page.
 router.get('/', function (req, res, next) {
+
+    const directory = 'uploads';
+
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+        for (const file of files) {
+            //console.log(path.join(directory, file));
+
+            fs.unlink(path.join(directory, file), err => {
+                if (err) throw err;
+            });
+
+        }
+    });
+
     var table1 = '<h1>HungH1</h1>';
     res.render('index', {name: 'Waiting', tablet: table1, tableToShow: table1});
 });
 
 router.get('/download', function (req, res, next) {
-    var file = './uploads/very_small_sample.csv';
+    var file = './downloads/very_small_sample.csv';
     res.download(file); // Set disposition and send it.
 });
 
@@ -40,8 +58,6 @@ router.get('/fetch-data', function (req, res, next) {
 });
 
 router.post('/submit-form', (req, res) => {
-    const postBody = req.body;
-    console.log(postBody.name);
 
     var form = new formidable.IncomingForm();
     form.encoding = "utf-8";
@@ -63,6 +79,9 @@ router.post('/submit-form', (req, res) => {
                     //console.log(jsonObj);
                     csvBody = jsonObj;
 
+                    //discretization here:
+
+
                     csvContent = JSON.stringify(jsonObj);
 
                     //console.log("Plus de detailles: ");
@@ -75,7 +94,7 @@ router.post('/submit-form', (req, res) => {
                     var html = tableify(csvContentJson);
                     console.log(html);
 
-                    res.render('index', {name: 'Uploaded', tablet: csvContent, tableToShow: html}, (err, html) => {
+                    res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent, tableToShow: html}, (err, html) => {
                         //res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent}, (err, html) => {
                         res.status(200).send(html);
                     });

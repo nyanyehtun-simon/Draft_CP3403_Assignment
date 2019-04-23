@@ -1,5 +1,6 @@
 var tableify = require('tableify');
 var discretization = require('discretisation.js');
+var statistics = require('statistics.js');
 
 const fs = require('fs');
 const path = require('path');
@@ -13,7 +14,7 @@ var formidable = require('formidable');
 var csv = require('csvtojson');
 var Collection = require('dstools').Collection;
 
-var csvContent;
+var csvContent_String;
 var csvContentJson;
 var csvBody;
 const jsdom = require("jsdom");
@@ -53,8 +54,8 @@ router.get('/fetch-data', function (req, res, next) {
     // we will accept one parameter from frontend named filename
     const filename = req.query.filename;
 
-    res.end(JSON.stringify(csvContent));
-    console.log(csvContent);
+    res.end(JSON.stringify(csvContent_String));
+    console.log(csvContent_String);
 });
 
 router.post('/submit-form', (req, res) => {
@@ -76,26 +77,32 @@ router.post('/submit-form', (req, res) => {
             csv()
                 .fromFile(file.path)
                 .then((jsonObj) => {
-                    //console.log(jsonObj);
+
+                    //THIS IS THE MAIN AND RAW CSV CONTENT THAT NEED TO BE PROCESSED:
                     csvBody = jsonObj;
 
                     //discretization here:
 
 
-                    csvContent = JSON.stringify(jsonObj);
+                    //CALC THE LIKELIHOOD:
 
-                    //console.log("Plus de detailles: ");
-                    //console.log("csvContent by string: " + csvContent);
 
-                    //Render here:
+                    //PARSE CSV RAW CONTENT TO STRING TO PRINT ON UI:
+                    csvContent_String = JSON.stringify(jsonObj);
+
+                    //CALC EACH ATTRIBUTE:
                     csvContentJson = gatherDataForEvidence(csvBody);
 
                     //Using TableIfy:
                     var html = tableify(csvContentJson);
                     console.log(html);
 
-                    res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent, tableToShow: html}, (err, html) => {
-                        //res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent}, (err, html) => {
+                    res.render('contingencytable.html', {
+                        name: 'Uploaded',
+                        tablet: csvContent_String,
+                        tableToShow: html
+                    }, (err, html) => {
+                        //res.render('contingencytable.html', {name: 'Uploaded', tablet: csvContent_String}, (err, html) => {
                         res.status(200).send(html);
                     });
                 })
@@ -221,7 +228,8 @@ var list_to_test_wo_class = {
     loan: 'no',
     contact: 'cellular',
     month: 'oct',
-    poutcome: 'unknown'
+    poutcome: 'unknown',
+    y: 'no'
 };
 
 //THE LAPLACE will applied in this function:
@@ -237,24 +245,23 @@ var getLikelihood = function (Data, Class, ClassifierOutcome, EvidenceAttributeL
     Data.forEach(function (element) {
         if (element[Class] == ClassifierOutcome) {
             countClass++;
-            console.log(countClass);
         }
     });
 
-    for (attribute in EvidenceAttributeList) {
+    var evidenceKeys = Object.keys(EvidenceAttributeList);
+
+    for (var i = 0; i < EvidenceAttributeList.length-1; i++) {
+        //for (attribute in EvidenceAttributeList) {
+        attribute = evidenceKeys[i];
         evidenceAttribute_value = EvidenceAttributeList[attribute];
 
         numerator = InstanceofFrequency(Data, attribute, evidenceAttribute_value, Class, ClassifierOutcome);
         probalityDenominator = ProbalityDenominator(Data, attribute, Class, ClassifierOutcome);
 
-
         finalLikelihood = numerator / probalityDenominator;
-
-        //console.log(finalLikelihood);
         total_finalLikelihood *= finalLikelihood;
     }
     total_finalLikelihood *= countClass;
-    //console.log(total_finalLikelihood);
     return total_finalLikelihood;
 };
 
@@ -267,4 +274,56 @@ var calculateNormalisedProbability = function (LikelihoodTrue, LikelihoodFalse, 
         return LikelihoodFalse / (LikelihoodTrue + LikelihoodFalse);
     }
 
+};
+
+
+//------------------------------------------------------------------------------------------------
+
+//Using the training data set to test:
+var getLikelihood_entire = function (Data) {
+    var toReturn = Data;
+    var attributeList = Object.keys(toReturn[1]);
+    var classAttr = attributeList[attributeList.length - 1];
+    var classList = [];
+    toReturn.forEach((dict) => {
+        classList.push(dict[classAttr])
+    });
+    classList = [...new Set(classList)];
+
+    var result = [];
+    var result_each = {
+        'class_name': '',
+        'likelihood': 0,
+        'normalised_probability':0
+    };
+    var sum_likelihood = 0;
+    var theHighestProbability = 0;
+    var theHighestProbability_class = ''; //the class (yes or no) in order to assign to the class.
+
+    //Classify each row of data set:
+    var n =0;
+    toReturn.forEach((dict) => {
+        //Get result:
+        classList.forEach((aClass) => {
+            result_each.class_name = aClass;
+            result_each.likelihood = getLikelihood(toReturn, classAttr, aClass, dict);
+            result_each.likelihood = 0;
+            sum_likelihood += result_each.likelihood;
+            result.push(result_each);
+        });
+        //Get normalised probability:
+        for(var i =0; i<result.length; i++){
+            result[i].normalised_probability = result[i].likelihood / sum_likelihood;
+        }
+        //Get the highest probability:
+        result.forEach((each) => {
+            if (each.normalised_probability > theHighestProbability){
+                theHighestProbability = each.normalised_probability;
+                theHighestProbability_class = each.class_name;
+            }
+        });
+        toReturn[n][classAttr] = theHighestProbability_class;
+        n++;
+    });
+    return toReturn;
 };

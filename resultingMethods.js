@@ -412,7 +412,7 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
     var originClassAttr = originalAttributeList[originalAttributeList.length - 1]; //y
     var classifiedClassAttr = classifiedAttributeList[classifiedAttributeList.length - 1]; //y
 
-    var classList;
+    var classList = [];
     originalData.forEach((dict) => {
         classList.push(dict[originClassAttr])
     });
@@ -429,7 +429,7 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
     classList.forEach((aClass) => {
         var m;
         currentDict = {
-            'class_name':aClass,
+            'class_name': aClass,
             'TP_Rate': 0,
             'FP_Rate': 0,
             'TN_Rate': 0,
@@ -443,15 +443,15 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
         //Getting TP Rate:
         for (m = 0; m < originalData.length; m++) {
             if (originalData[m][originClassAttr] === aClass
-                && originalData[m][originClassAttr] === aClass) {
+                && classifiedData[m][originClassAttr] === aClass) {
                 currentDict['TP_Rate']++;
             }
         }
 
         //Getting FP Rate:
         for (m = 0; m < originalData.length; m++) {
-            if (originalData[m][originClassAttr] != aClass
-                && originalData[m][originClassAttr] === aClass) {
+            if (originalData[m][originClassAttr] !== aClass
+                && classifiedData[m][originClassAttr] === aClass) {
                 currentDict['FP_Rate']++;
             }
         }
@@ -459,15 +459,15 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
         //Getting FN Rate:
         for (m = 0; m < originalData.length; m++) {
             if (originalData[m][originClassAttr] === aClass
-                && originalData[m][originClassAttr] != aClass) {
+                && classifiedData[m][originClassAttr] !== aClass) {
                 currentDict['FN_Rate']++;
             }
         }
 
         //Getting TN Rate:
         for (m = 0; m < originalData.length; m++) {
-            if (originalData[m][originClassAttr] != aClass
-                && originalData[m][originClassAttr] != aClass) {
+            if (originalData[m][originClassAttr] !== aClass
+                && classifiedData[m][originClassAttr] !== aClass) {
                 currentDict['TN_Rate']++;
             }
         }
@@ -480,11 +480,18 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
             = currentDict['TN_Rate'] / (currentDict['FP_Rate'] + currentDict['TN_Rate']);
 
         currentDict['Recall']
-            = currentDict['TN_Rate'] / (currentDict['FP_Rate'] + currentDict['TN_Rate']);
+            = currentDict['TP_Rate'] / (currentDict['TP_Rate'] + currentDict['FN_Rate']);
 
         currentDict['Precision']
-            = currentDict['TN_Rate'] / (currentDict['FP_Rate'] + currentDict['TN_Rate']);
+            = currentDict['TP_Rate'] / (currentDict['TP_Rate'] + currentDict['FP_Rate']);
+
+        detailedAccuracyByClass.push(currentDict);
     });
 
-
+    return detailedAccuracyByClass;
 };
+
+var errorThings = getDetailedAccuracyByClass(originalData, classifiedData);
+console.log(errorThings);
+
+module.exports = [getDetailedAccuracyByClass(), calcCorectandIncorrectInstances()];

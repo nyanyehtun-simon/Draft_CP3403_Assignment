@@ -30,32 +30,43 @@
                 console.log("document loaded");
                 document.getElementById("demo").innerHTML = "CP3403 Assignment - Programming Product";
 
-                var vartoadd = (("<%= tablet%>").replace(/&lt;/g, "<")).replace(/&gt;/g, ">");
+                var tablet2 = ((("<%= tablet2%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var detailed_accuracy = ((("<%= detailed_accuracy%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var vartoadd = ((("<%= tablet%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var correctness = ((("<%= correctness%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
                 var tableToShow = ((("<%= tableToShow%>")
                     .replace(/&lt;/g, "<"))
                     .replace(/&gt;/g, ">"))
                     .replace(/&#34;/g, "\"");
 
-                console.log(tableToShow);
+                var classified = ((("<%= classifiedTableToShow%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
 
-                console.log(
-                    (vartoadd
-                        .replace(/&#34;/g, "\""))
-                );
+                $("#correctness").html(correctness);
+                $("#example-jquery-app-output").html(tableToShow);
+                $("#statistics").html(detailed_accuracy);
+                $("#sample-table").html(vartoadd);
+                $("#classifiedTableToShow").html(classified);
+                $("#tablet2").html(tablet2);
 
-                var data = JSON.parse(vartoadd.replace(/&#34;/g, "\""));
-                console.log(data);
-
-                var dataAttribute = [];
-
-                Object.keys(data).forEach(function (key) {
-                    dataAttribute.push({
-                        attribute: key
-                    })
-                });
-                dataAttribute.pop();
-
-                $("#example-jquery-app-output").html( tableToShow);
             }, 700);
         }
     </script>
@@ -76,14 +87,31 @@
         to download test file.
     </div>
 
-    <h2>10 sample data rows from uploaded dataset:</h2>
+    <h2>Original dataset:</h2>
     <div id="data"></div>
-    <di class="table" id="sample-table"></di>
+    <div class="table" id="sample-table"></div>
     <div id="table-to-show"></div>
 
-    <h2>Likelihood table:</h2>
+    <h2>Classified dataset:</h2>
+    <div class="table" id="tablet2"></div>
 
-    <div id="example-jquery-app-output" class="table"></div>
+    <h2>Correctness table:</h2>
+    <div id="correctness" class="table"></div>
+
+    <h2>Likelihood table:</h2>
+    <div id="statistics" class="table"></div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Original</h3>
+            <div id="example-jquery-app-output" class="table"></div>
+        </div>
+        <div class="col-sm-6">
+            <h3>Classified</h3>
+            <div id="classifiedTableToShow" class="table"></div>
+        </div>
+    </div>
+
 
 </div>
 

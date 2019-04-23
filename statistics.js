@@ -1,350 +1,7 @@
-var originalData = [
-    {
-        "job": "unemployed",
-        "marital": "married",
-        "education": "primary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "oct",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "services",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "yes",
-        "contact": "cellular",
-        "month": "may",
-        "poutcome": "failure",
-        "y": "no"
-    },
-    {
-        "job": "management",
-        "marital": "single",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "failure",
-        "y": "no"
-    },
-    {
-        "job": "management",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "yes",
-        "contact": "unknown",
-        "month": "jun",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "blue-collar",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "management",
-        "marital": "single",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "feb",
-        "poutcome": "failure",
-        "y": "yes"
-    },
-    {
-        "job": "self-employed",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "may",
-        "poutcome": "other",
-        "y": "yes"
-    },
-    {
-        "job": "technician",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "entrepreneur",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "services",
-        "marital": "married",
-        "education": "primary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "yes",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "failure",
-        "y": "no"
-    },
-    {
-        "job": "services",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "admin.",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "technician",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "aug",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "student",
-        "marital": "single",
-        "education": "secondary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "unknown",
-        "y": "yes"
-    }
-];
-
-var classifiedData = [
-    {
-        "job": "unemployed",
-        "marital": "married",
-        "education": "primary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "oct",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "services",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "yes",
-        "contact": "cellular",
-        "month": "may",
-        "poutcome": "failure",
-        "y": "no"
-    },
-    {
-        "job": "management",
-        "marital": "single",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "failure",
-        "y": "no"
-    },
-    {
-        "job": "management",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "yes",
-        "contact": "unknown",
-        "month": "jun",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "blue-collar",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "management",
-        "marital": "single",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "feb",
-        "poutcome": "failure",
-        "y": "yes"
-    },
-    {
-        "job": "self-employed",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "may",
-        "poutcome": "other",
-        "y": "yes"
-    },
-    {
-        "job": "technician",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "yes"
-    },
-    {
-        "job": "entrepreneur",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "services",
-        "marital": "married",
-        "education": "primary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "yes",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "failure",
-        "y": "no"
-    },
-    {
-        "job": "services",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "month": "may",
-        "poutcome": "unknown",
-        "y": "yes"
-    },
-    {
-        "job": "admin.",
-        "marital": "married",
-        "education": "secondary",
-        "default": "no",
-        "housing": "yes",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "unknown",
-        "y": "yes"
-    },
-    {
-        "job": "technician",
-        "marital": "married",
-        "education": "tertiary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "aug",
-        "poutcome": "unknown",
-        "y": "no"
-    },
-    {
-        "job": "student",
-        "marital": "single",
-        "education": "secondary",
-        "default": "no",
-        "housing": "no",
-        "loan": "no",
-        "contact": "cellular",
-        "month": "apr",
-        "poutcome": "unknown",
-        "y": "no"
-    }
-];
 
 module.exports = {
 
     calcCorectandIncorrectInstances: function (originalData, classifiedData) {
-//the class will be understood as the very last column
-
         var toReturn = {
             'Correct': 0,
             'Incorrect': 0
@@ -353,8 +10,8 @@ module.exports = {
         var originalAttributeList = Object.keys(originalData[1]);
         var classifiedAttributeList = Object.keys(classifiedData[1]);
 
-        console.log(originalAttributeList);
-        console.log(classifiedAttributeList);
+        //console.log(originalAttributeList);
+        //console.log(classifiedAttributeList);
 
         var originClassAttr = originalAttributeList[originalAttributeList.length - 1];
         var classifiedClassAttr = classifiedAttributeList[classifiedAttributeList.length - 1];
@@ -362,7 +19,7 @@ module.exports = {
         var originalOne = {};
         var classifiedOne = {};
 
-//var i = 0;
+        //var i = 0;
         for (var i = 0; i < originalData.length; i++) {
             console.log(i);
 
@@ -377,7 +34,7 @@ module.exports = {
     },
 
 
-//Calculate : TP Rate  FP Rate  Precision  Recall :
+    //Calculate : TP Rate  FP Rate  Precision  Recall :
     getDetailedAccuracyByClass: function (originalData, classifiedData) {
         var detailedAccuracyByClass = [
             {
@@ -400,7 +57,7 @@ module.exports = {
         var Sensitivity = 0;
         var Specificity = 0;
 
-//Make again a classlist:
+        //Make again a classlist:
         var toReturn = {
             'Correct': 0,
             'Incorrect': 0
@@ -428,7 +85,6 @@ module.exports = {
 
         var currentDict;
 
-        //Getting TP Rate:
         classList.forEach((aClass) => {
             var m;
             currentDict = {

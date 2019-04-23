@@ -169,6 +169,8 @@ var originalData = [
     }
 ];
 
+console.log(originalData);
+
 var InstanceofFrequency = function (Data, Evidence, EvidenceAttribute, Class, ClassifierOutcome, laplace) {
     var count = 0;
     Data.forEach(function (element) {
@@ -239,7 +241,7 @@ var getLikelihood = function (Data, Class, ClassifierOutcome, EvidenceAttributeL
 };
 
 var getLikelihood_entire = function (Data, laplace) {
-    var toReturn = Data;
+    var toReturn = JSON.parse(JSON.stringify(Data));
     var attributeList = Object.keys(toReturn[1]);
     var classAttr = attributeList[attributeList.length - 1];
     var classList = [];
@@ -264,9 +266,6 @@ var getLikelihood_entire = function (Data, laplace) {
 
         //Get results:
         classList.forEach((aClass) => {
-            //result_each.class_name = aClass;
-            //result_each.likelihood = getLikelihood(toReturn, classAttr, aClass, dict);
-            //results.push(result_each);
             results.push({
                 'class_name': aClass,
                 'likelihood': getLikelihood(toReturn, classAttr, aClass, dict, laplace),
@@ -274,11 +273,9 @@ var getLikelihood_entire = function (Data, laplace) {
             });
         });
 
-        //console.log(results);
         results.forEach((eachResult) => {
             sum_likelihood += eachResult.likelihood;
         });
-        //console.log("Sum is " + sum_likelihood);
 
         //Get normalised probability:
         j = 0;
@@ -295,12 +292,14 @@ var getLikelihood_entire = function (Data, laplace) {
 
         console.log(results);
         //Get the highest probability:
+        theHighestProbability = 0;
         results.forEach((each) => {
             if (each.normalised_probability > theHighestProbability) {
                 theHighestProbability = each.normalised_probability;
                 theHighestProbability_class = each.class_name;
             }
         });
+        console.log("Therefore the highest is " + theHighestProbability_class + " - " +theHighestProbability + "\n\n");
 
         //console.log(results);
         //.log("The highest is :" + theHighestProbability_class);
@@ -311,4 +310,5 @@ var getLikelihood_entire = function (Data, laplace) {
 };
 
 var tested = getLikelihood_entire(originalData, true);
-//console.log(tested);
+console.log(originalData);
+console.log("This is tested: " + tested);

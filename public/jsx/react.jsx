@@ -8,10 +8,7 @@ class Person extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            data: [],
-            figure: null
-        }
+        this.state = {data: []}
     }
 
     componentDidMount() {
@@ -29,39 +26,19 @@ class Person extends React.Component {
 
     // Use the render function to return JSX component
 
-    /*
-    const figure = {
-        data: [{
-            type: 'box',
-            y: [datahere]
-        }],
-        layout: {}
-    }
-    */
-
     render() {
-        <Plot data={[{
-            type: 'box',
-            y: [1, 2, 5, 6, 7, 8, 9, 9, 2, 9]
-        }]}
-              layout={{
-                  title: 'A Sample'
-              }}/>
+        return (
+            <div className="person-info">
+                <h3>Person {this.props.personNo}:</h3>
+                <div>
+                    {this.populateDataInHtml()}
+                    {/*<li>First Name: {this.props.firstName}</li>*/}
+                    {/*<li>Last Name: {this.props.lastName}</li>*/}
+                </div>
+            </div>
+        );
     }
 
-    /* render() {
-         return (
-             <div className="person-info">
-                 <h3>Person {this.props.personNo}:</h3>
-                 <div>
-                     {this.populateDataInHtml()}
-                     {/!*<li>First Name: {this.props.firstName}</li>*!/}
-                     {/!*<li>Last Name: {this.props.lastName}</li>*!/}
-                 </div>
-             </div>
-         );
-     }
- */
 
     populateDataInHtml() {
 
@@ -72,7 +49,7 @@ class Person extends React.Component {
         * render cai numList do bang plot: --> plot dung [array]
         * */
 
-        var listOfKeys;
+        var listOfKeys ;
         var numlist = [];
 
         let div = [];
@@ -96,18 +73,18 @@ class Person extends React.Component {
             })
         });
 
-        return numlist;
+        numlist.forEach((element) => {
+
+        });
+
+        div.push(<li>{dict["job"]}</li>);
+
+        return div;
     }
 }
 
 const element1 = document.getElementById('person1');
 
 // Use the ReactDOM.render to show the component on the browser
-//ReactDOM.render(<Person personNo='1'/>, element1);
-ReactDOM.render(<Plot data={[{
-    type: 'box',
-    y: [1, 2, 5, 6, 7, 8, 9, 9, 2, 9]
-}]}
-                      layout={{
-                          title: 'A Sample'
-                      }}/>, element1);
+ReactDOM.render(
+    <Person personNo='1'/>, element1);

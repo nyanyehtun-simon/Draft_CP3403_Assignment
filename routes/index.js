@@ -61,8 +61,9 @@ router.get('/fetch-data', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     // we will accept one parameter from frontend named filename
     const filename = req.query.filename;
-    res.end(JSON.stringify(csvBody));
-    //console.log(csvBody);
+
+    res.end(JSON.stringify(csvContent_String));
+    console.log(csvContent_String);
 });
 
 router.get('/fetch-data-numeric', function (req, res, next) {

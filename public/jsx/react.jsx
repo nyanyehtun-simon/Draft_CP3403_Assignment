@@ -1,6 +1,8 @@
 //import * as naive from "./naive_algorithm"
 //import { getValueInput, filterNames } from './filters.js';
 
+import Plot from 'react-plotly.js';
+
 // Create a ES6 class component
 class Person extends React.Component {
 
@@ -28,11 +30,11 @@ class Person extends React.Component {
         return (
             <div className="person-info">
                 <h3>Person {this.props.personNo}:</h3>
-                <ul>
+                <div>
                     {this.populateDataInHtml()}
                     {/*<li>First Name: {this.props.firstName}</li>*/}
                     {/*<li>Last Name: {this.props.lastName}</li>*/}
-                </ul>
+                </div>
             </div>
         );
     }
@@ -78,9 +80,6 @@ class Person extends React.Component {
         div.push(<li>{dict["job"]}</li>);
 
         return div;
-
-        //console.log('inside populateHTML');
-        //console.log(this.state);
     }
 }
 

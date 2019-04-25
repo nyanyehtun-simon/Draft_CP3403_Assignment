@@ -7,12 +7,12 @@ module.exports = {
 
         var aDictForReturn = {};
 
-        var keyList = Object.keys(data[1]);
+        var keyList = Object.keys(dataset[1]);
         var keyListNumeric = [];
         var toReturn = null;
 
         keyList.forEach((key) => {
-            data.forEach((object => {
+            dataset.forEach((object => {
                 if ((typeof object[key]) == "number") {
                     keyListNumeric.push(key);
                 }

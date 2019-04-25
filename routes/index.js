@@ -98,14 +98,14 @@ router.post('/submit-form', (req, res) => {
                     console.log("This is CSV body: " + JSON.stringify(csvBody));
 
                     //get only numeric cols: --> this will return a JSON:
-                    csvBodyNumeric = getNumeric.getNumericAttributes(JSON.parse(JSON.stringify(jsonObj)));
+                    csvBodyNumeric = getNumeric.getNumericAttributes(csvBody);
 
                     //Discretization here:
                     //Check if there is number inside:
                     isNumericInside = discretization.isThereNumericInside(csvBody);
                     if (isNumericInside === true){
                         csvBody = discretization.discretise(3, csvBody);
-                    };
+                    }
 
                     //CALC THE LIKELIHOOD ENTIRE:
                     classifiedSet = getLikelihood_entire(csvBody, true);

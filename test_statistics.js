@@ -462,15 +462,19 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
         //Getting Sensitivity:
         currentDict['Sensitivity']
             = currentDict['TP_Rate'] / (currentDict['TP_Rate'] + currentDict['FN_Rate']);
+        currentDict['Sensitivity'] = Math.round(currentDict['Sensitivity'] * 100) / 100;
 
         currentDict['Specificity']
             = currentDict['TN_Rate'] / (currentDict['FP_Rate'] + currentDict['TN_Rate']);
+        currentDict['Specificity'] = Math.round(currentDict['Specificity'] * 100) / 100;
 
         currentDict['Recall']
             = currentDict['TP_Rate'] / (currentDict['TP_Rate'] + currentDict['FN_Rate']);
+        currentDict['Recall'] = Math.round(currentDict['Recall'] * 100) / 100;
 
         currentDict['Precision']
             = currentDict['TP_Rate'] / (currentDict['TP_Rate'] + currentDict['FP_Rate']);
+        currentDict['Precision'] = Math.round(currentDict['Precision'] * 100) / 100;
 
         detailedAccuracyByClass.push(currentDict);
     });
@@ -479,5 +483,5 @@ var getDetailedAccuracyByClass = function (originalData, classifiedData) {
 
 var detailed = getDetailedAccuracyByClass(originalData, classifiedData);
 var correctness = calcCorectandIncorrectInstances(originalData, classifiedData);
-console.log(detailed);
-console.log(correctness);
+//console.log(detailed);
+//console.log(correctness);

@@ -1,7 +1,8 @@
 var tableify = require('tableify');
 
-//var discretization = require('discretisation.js');
+var discretization = require('../discretisation.js');
 var statistics = require('../statistics.js');
+var getNumeric = require('../get_only_numeric_cols.js');
 
 const fs = require('fs');
 const path = require('path');
@@ -18,8 +19,11 @@ var Collection = require('dstools').Collection;
 var csvContent_String;
 var csvContentJson;
 var csvBody;
+var csvBodyNumeric;
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
+
+var isNumericInside;
 
 var correctOrNot;
 
@@ -61,6 +65,12 @@ router.get('/fetch-data', function (req, res, next) {
     console.log(csvContent_String);
 });
 
+router.get('/fetch-data-numeric', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    const filename = req.query.filename;
+    res.end(JSON.stringify(csvBodyNumeric));
+});
+
 router.post('/submit-form', (req, res) => {
 
     var form = new formidable.IncomingForm();
@@ -87,7 +97,15 @@ router.post('/submit-form', (req, res) => {
                     csvBody = JSON.parse(JSON.stringify(jsonObj));
                     console.log("This is CSV body: " + JSON.stringify(csvBody));
 
-                    //TODO: discretization here:
+                    //get only numeric cols: --> this will return a JSON:
+                    csvBodyNumeric = getNumeric.getNumericAttributes(JSON.parse(JSON.stringify(jsonObj)));
+
+                    //Discretization here:
+                    //Check if there is number inside:
+                    isNumericInside = discretization.isThereNumericInside(csvBody);
+                    if (isNumericInside === true){
+                        csvBody = discretization.discretise(3, csvBody);
+                    };
 
                     //CALC THE LIKELIHOOD ENTIRE:
                     classifiedSet = getLikelihood_entire(csvBody, true);

@@ -10,19 +10,20 @@ class Person extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/fetch-data')
+        fetch('/fetch-data-numeric')
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 return res.json()
             })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 this.setState({data: JSON.parse(data)});
                 getValueInput("Hungggggggggg");
             })
     };
 
     // Use the render function to return JSX component
+
     render() {
         return (
             <div className="person-info">
@@ -36,16 +37,47 @@ class Person extends React.Component {
         );
     }
 
+
     populateDataInHtml() {
-        let li = [];
-        this.state.data.forEach(instance => {
-            console.log(instance);
-            var listOfKeys = Object.keys(instance);
-            console.log(listOfKeys);
-            //li.push(<li>{instance.job}</li>);
-            li.push(<li>{instance["job"]}</li>)
+
+        /*TODO: Cac buoc tao mot cai plot:
+        * tao list of key: ok
+        * tao mot list chua toan so: numList[{name & list }]
+        * trong tung dict, lay dict[key] --> gan push vao numList
+        * render cai numList do bang plot: --> plot dung [array]
+        * */
+
+        var listOfKeys ;
+        var numlist = [];
+
+        let div = [];
+
+        //get the list of keys:
+        this.state.data.forEach(dict => {
+            listOfKeys = Object.keys(dict);
         });
-        return li;
+
+        //get values to numlist:
+        listOfKeys.forEach((key) => {
+            numlist.push({
+                keyname: key,
+                listOfValue: ((key) => {
+                    this.state.data.forEach(dict => {
+                        var toReturn = [];
+                        toReturn.push(dict[key]);
+                        return toReturn;
+                    });
+                })
+            })
+        });
+
+        numlist.forEach((element) => {
+
+        });
+
+        div.push(<li>{dict["job"]}</li>);
+
+        return div;
 
         //console.log('inside populateHTML');
         //console.log(this.state);
@@ -53,16 +85,7 @@ class Person extends React.Component {
 }
 
 const element1 = document.getElementById('person1');
-//const element2 = document.getElementById('person2');
 
-// setTimeout(() => {
-// Use the ReactDOM.render to show your component on the browser
+// Use the ReactDOM.render to show the component on the browser
 ReactDOM.render(
-    <Person personNo='1'/>, element1
-)
-
-// Use the ReactDOM.render to show your component on the browser
-//     ReactDOM.render(
-//         <Person personNo='2' firstName='Htun' lastName='Nyan'/>, element2
-//     )
-// }, 10000);
+    <Person personNo='1'/>, element1);

@@ -269,7 +269,7 @@ var getLikelihood_entire = function (Data, laplace) {
             results.push({
                 'class_name': aClass,
                 'likelihood': getLikelihood(toReturn, classAttr, aClass, dict, laplace),
-                'normalised_probability': (getLikelihood(toReturn, classAttr, aClass, dict, laplace) / 14)
+                'normalised_probability': 0
             });
         });
 

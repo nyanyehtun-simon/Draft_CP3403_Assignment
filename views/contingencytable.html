@@ -30,6 +30,33 @@
                 console.log("document loaded");
                 document.getElementById("demo").innerHTML = "CP3403 Assignment - Programming Product";
 
+                var csvBodyNumeric = ((("<%= csvBodyNumeric%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+                csvBodyNumeric = JSON.parse(csvBodyNumeric);
+
+                var dataforPlot = [];
+                var temp = [];
+
+                Object.keys(csvBodyNumeric[1]).forEach((key) => {
+                    temp =[];
+                    csvBodyNumeric.forEach((dict) => {
+                        temp.push(dict[key]);
+                    });
+
+                    dataforPlot.push({
+                        type: 'box',
+                        y: temp,
+                        name: key
+                    });
+                });
+                console.log(dataforPlot);
+
+                Plotly.newPlot('csvBodyNumeric', dataforPlot, {
+                    title: 'All Numeric Attributes in The Dataset (Normalised)'
+                });
+
                 var tablet2 = ((("<%= tablet2%>")
                     .replace(/&lt;/g, "<"))
                     .replace(/&gt;/g, ">"))
@@ -66,6 +93,7 @@
                 $("#sample-table").html(vartoadd);
                 $("#classifiedTableToShow").html(classified);
                 $("#tablet2").html(tablet2);
+                //$("#csvBodyNumeric").html(csvBodyNumeric);
 
             }, 700);
         }
@@ -87,13 +115,19 @@
         to download test file.
     </div>
 
-    <h2>Original dataset:</h2>
-    <div id="data"></div>
-    <div class="table" id="sample-table"></div>
-    <div id="table-to-show"></div>
+    <h2>All Numeric below:</h2>
+    <div id="csvBodyNumeric"></div>
+    <!--<script src="/jsx/react.jsx" type="text/babel"></script>-->
 
-    <h2>Classified dataset:</h2>
-    <div class="table" id="tablet2"></div>
+
+    <!-- <h2>Original dataset:</h2>
+     <div id="data"></div>
+     <div class="table" id="sample-table"></div>
+     <div id="table-to-show"></div>
+
+     <h2>Classified dataset:</h2>
+     <div class="table" id="tablet2"></div>-->
+
 
     <h2>Correctness table:</h2>
     <div id="correctness" class="table"></div>

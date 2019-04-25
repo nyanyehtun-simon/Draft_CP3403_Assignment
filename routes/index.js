@@ -99,7 +99,7 @@ router.post('/submit-form', (req, res) => {
                     console.log("This is CSV body: " + JSON.stringify(csvBody));
 
                     //get only numeric cols: --> this will return a JSON:
-                    csvBodyNumeric = getNumeric.getNumericAttributes(csvBody);
+                    csvBodyNumeric = getNumeric.getNumericAttributesNormalised(csvBody);
 
                     //Discretization here:
                     //Check if there is number inside:
@@ -125,6 +125,7 @@ router.post('/submit-form', (req, res) => {
                     //console.log(html);
 
                     res.render('contingencytable.html', {
+                        csvBodyNumeric: JSON.stringify(csvBodyNumeric),
                         name: 'Uploaded',
                         tablet: tableify(jsonObj),
                         tablet2:tableify(classifiedSet),

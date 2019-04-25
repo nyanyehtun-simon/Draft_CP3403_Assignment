@@ -1,7 +1,7 @@
 //import * as naive from "./naive_algorithm"
 //import { getValueInput, filterNames } from './filters.js';
 
-import Plot from 'react-plotly.js';
+var Plot = require('react-plotly.js');
 
 // Create a ES6 class component
 class Person extends React.Component {
@@ -28,7 +28,7 @@ class Person extends React.Component {
 
     render() {
         return (
-            <div className="person-info">
+            <div>
                 <h3>Person {this.props.personNo}:</h3>
                 <div>
                     {this.populateDataInHtml()}
@@ -85,6 +85,15 @@ class Person extends React.Component {
 
 const element1 = document.getElementById('person1');
 
+const figure = {
+    data:[{
+        type:'box',
+        x:[2,3,4,5,6,7,8,9,12,2]
+    }],
+    layout:{
+        title:'This is a plot'
+    }
+};
+
 // Use the ReactDOM.render to show the component on the browser
-ReactDOM.render(
-    <Person personNo='1'/>, element1);
+ReactDOM.render(<Plot data={figure.data} layout={figure.layout}/>, element1);

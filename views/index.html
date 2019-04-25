@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Form Action</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <script src="https://unpkg.com/react@16.4.2/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16.4.2/umd/react-dom.production.min.js"></script>
@@ -24,6 +22,11 @@
             crossorigin="anonymous"></script>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+   <!-- <link rel="stylesheet" href="stylesheets/input-file.css">
+    <script src="stylesheets/input-file.js"></script>-->
+
+
     <script>
         window.onload = function () {
             setTimeout(() => {
@@ -55,7 +58,7 @@
                 });
                 dataAttribute.pop();
 
-                $("#example-jquery-app-output").html( tableToShow);
+                $("#example-jquery-app-output").html(tableToShow);
 
                 //Just for testing:
                 /*
@@ -97,40 +100,41 @@
         //$("#example-jquery-app-output .list").json2html({},transforms.list);
     </script>
 </head>
-<body>
+<body class="p-0">
 
-<div class="container">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 p-5" style="background-color: #F5F5F0; height:100vh; display: flex; align-items: center;">
 
-    <h1 class="h1" id="demo"></h1>
+            <div class="align-middle">
+                <h1 class="h1" id="demo"></h1>
 
-    <h3 id="username-text"><%= name%></h3>
+                <h3 class="mt-5" id="username-text"><%= name%></h3>
 
-    <div class="alert alert-warning" role="alert">
-        Dear my CP3403 group, please click
-        <form method="get" action="/download">
-            <button type="submit">here</button>
-        </form>
-         to download test file.
+                <form class="mt-5 mb-5" method="POST" action="/submit-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input class="form-control-file" type="file" name="upload" multiple>
+
+                    </div>
+                    <span class="glyphicon glyphicon-ok"></span><input class="btn btn-primary" type="submit"/>
+                </form>
+
+
+            </div>
+
+
+        </div>
+        <div class="col-sm-6 p-5" style="background-color: #76D7D0; height:100vh; display: flex; align-items: center;">
+            <div>
+                Dear my CP3403 group, please click
+                <form method="get" action="/download">
+                    <button type="submit">here</button>
+                </form>
+                to download test file.
+            </div>
+        </div>
+
     </div>
-
-    <form method="POST" action="/submit-form" enctype="multipart/form-data">
-
-        <input class="btn btn-secondary" type="file" name="upload" multiple>
-
-        <input class="btn btn-primary" type="submit"/>
-    </form>
-
-    <h2>10 sample data rows from uploaded dataset:</h2>
-    <div id="data"></div>
-    <di class="table" id="sample-table"></di>
-    <div id="table-to-show"></div>
-
-    <!--<h1>People: This is using React inside Node JS project</h1>
-    <div id="person1"></div>
-    <div id="person2"></div>-->
-
-    <div id="example-jquery-app-output" class="table"></div>
-
 </div>
 
 </body>

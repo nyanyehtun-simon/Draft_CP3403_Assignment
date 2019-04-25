@@ -28,7 +28,7 @@
         window.onload = function () {
             setTimeout(() => {
                 console.log("document loaded");
-                document.getElementById("demo").innerHTML = "CP3403 Assignment - Programming Product";
+                document.getElementById("demo").innerHTML = "Classification Results";
 
                 var csvBodyNumeric = ((("<%= csvBodyNumeric%>")
                     .replace(/&lt;/g, "<"))
@@ -40,7 +40,7 @@
                 var temp = [];
 
                 Object.keys(csvBodyNumeric[1]).forEach((key) => {
-                    temp =[];
+                    temp = [];
                     csvBodyNumeric.forEach((dict) => {
                         temp.push(dict[key]);
                     });
@@ -99,24 +99,25 @@
         }
     </script>
 </head>
-<body>
+<body style="background-color: rgba(245,245,240,0.5); padding: 0">
+
+<div style="background-color: black; max-width: 100%" class="w-100 row p-0 m-0">
+    <div class="container mt-5 mb-5">
+        <h1 class="h1 text-white" id="demo"></h1>
+    </div>
+</div>
 
 <div class="container">
 
-    <h1 class="h1" id="demo"></h1>
 
-    <h3 id="username-text"><%= name%></h3>
+    <span class="glyphicon glyphicon-ok"></span><h3 class="m-5" id="username-text"><%= name%></h3>
 
-    <div class="alert alert-warning" role="alert">
-        Dear my CP3403 group, please click
-        <form method="get" action="/download">
-            <button type="submit">here</button>
-        </form>
-        to download test file.
+    <div class="card border mb-5 shadow-lg">
+        <h3 class="card-header">All Numeric below:</h3>
+        <div class="card-body">
+            <div id="csvBodyNumeric"></div>
+        </div>
     </div>
-
-    <h2>All Numeric below:</h2>
-    <div id="csvBodyNumeric"></div>
     <!--<script src="/jsx/react.jsx" type="text/babel"></script>-->
 
 
@@ -129,11 +130,19 @@
      <div class="table" id="tablet2"></div>-->
 
 
-    <h2>Correctness table:</h2>
-    <div id="correctness" class="table"></div>
+    <div class="card mb-5 shadow-lg rounded">
+        <h3 class="card-header">Correctness Table:</h3>
+        <div class="card-body">
+            <div id="correctness" class="table"></div>
+        </div>
+    </div>
 
-    <h2>Likelihood table:</h2>
-    <div id="statistics" class="table"></div>
+    <div class="card mb-5 shadow-lg rounded">
+        <h3 class="card-header">Likelihood table:</h3>
+        <div class="card-body">
+            <div id="statistics" class="table"></div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-sm-6">

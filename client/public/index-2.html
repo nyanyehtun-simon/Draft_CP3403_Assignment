@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Action</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+  <script src="https://unpkg.com/react@16.4.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.4.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    window.onload = function () {
+      setTimeout(() => {
+        console.log("document loaded");
+        document.getElementById("demo").innerHTML = "CP3403 Assignment - Programming Product";
+
+        var vartoadd = (("<%= tablet%>").replace(/&lt;/g, "<")).replace(/&gt;/g, ">");
+        var tableToShow = ((("<%= tableToShow%>")
+                .replace(/&lt;/g, "<"))
+                .replace(/&gt;/g, ">"))
+                .replace(/&#34;/g, "\"");
+
+        console.log(tableToShow);
+
+        console.log(
+                (vartoadd
+                        .replace(/&#34;/g, "\""))
+        );
+
+        var data = JSON.parse(vartoadd.replace(/&#34;/g, "\""));
+        console.log(data);
+
+        var dataAttribute = [];
+
+        Object.keys(data).forEach(function (key) {
+          dataAttribute.push({
+            attribute: key
+          })
+        });
+        dataAttribute.pop();
+
+        $("#example-jquery-app-output").html( tableToShow);
+
+        //Just for testing:
+        /*
+        var data = [
+            {"title":"The Shawshank Redemption","year":"1994","rating":"9.2"},
+            {"title":"The Godfather","year":"1972","rating":"9.2"},
+            {"title":"The Godfather: Part II","year":"1974","rating":"9.0"},
+            {"title":"The Dark Knight ","year":"2008","rating":"9.0"},
+            {"title":"12 Angry Men","year":"1957","rating":"9.0"}
+        ];
+        */
+        /*
+        var transforms = {
+            "list":{"<>":"ul","html":function(){
+                    return($.json2html(dataAttribute,transforms.items));
+                }},
+
+            "items":{"<>":"li","html":function(obj, index){
+
+                    return( (index+1) + ". " + obj.attribute);
+
+                },"onclick":function(e){
+                    $("#example-jquery-app-output .details").empty().json2html(e.obj,transforms.details);
+                }},
+
+            "details":[
+                {"<>":"div","html":[
+                        {"<>":"h5","text":"${title}"}
+                    ]},
+                {"<>":"div","text":"Year: ${year}"},
+                {"<>":"div","text":"Rating: ${rating}"},
+            ]
+        };
+
+        $("#example-jquery-app-output .list").json2html({},transforms.list);
+        */
+      }, 700);
+    }
+    //$("#example-jquery-app-output .list").json2html({},transforms.list);
+  </script>
+</head>
+<body>
+
+<div class="container">
+
+  <h1 class="h1" id="demo"></h1>
+
+  <h3 id="username-text"><%= name%></h3>
+
+  <div class="alert alert-warning" role="alert">
+    Dear my CP3403 group, please click
+    <form method="get" action="/download">
+      <button type="submit">here</button>
+    </form>
+    to download test file.
+  </div>
+
+  <form method="POST" action="/submit-form" enctype="multipart/form-data">
+
+    <input class="btn btn-secondary" type="file" name="upload" multiple>
+
+    <input class="btn btn-primary" type="submit"/>
+  </form>
+
+  <h2>10 sample data rows from uploaded dataset:</h2>
+  <div id="data"></div>
+  <div id="root"></div>
+  <div class="table" id="sample-table"></div>
+  <div id="table-to-show"></div>
+
+  <!--<h1>People: This is using React inside Node JS project</h1>
+  <div id="person1"></div>
+  <div id="person2"></div>-->
+
+  <div id="example-jquery-app-output" class="table"></div>
+
+  <!--<table class="table"><tr><th class="array">someArrayOfObjects</th><td class="array"><table><thead><tr><th class="number">a</th><th class="number">b</th><th class="number">c</th></tr></thead><tbody><tr><td class="number">1</td><td class="number">2</td><td class="number">3</td></tr><tr><td class="number">2</td><td class="number">3</td><td class="number">4</td></tr><tr><td class="number">3</td><td class="number">4</td><td class="number">5</td></tr></tbody></table></td></tr><tr><th class="object">someObject</th><td class="object"><table><tr><th class="string">key1</th><td class="string">value1</td></tr><tr><th class="array">someArray</th><td class="array"><table><tbody><tr><td class="string">value2</td></tr><tr><td class="string">value3</td></tr><tr><td class="string">value4</td></tr><tr><td class="string">value5</td></tr></tbody></table></td></tr><tr><th class="array">someArrayOfObjects</th><td class="array"><table><thead><tr><th class="number">key2</th></tr></thead><tbody><tr><td class="number">123</td></tr><tr><td class="number">234</td></tr><tr><td class="number">345</td></tr></tbody></table></td></tr></table></td></tr></table>-->
+
+  <!--<script src="jsx/react.js" type="text/babel"></script>-->
+
+</div>
+
+</body>
+</html>

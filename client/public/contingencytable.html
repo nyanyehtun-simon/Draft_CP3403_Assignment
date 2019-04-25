@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Action</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <script src="https://unpkg.com/react@16.4.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.4.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                console.log("document loaded");
+                document.getElementById("demo").innerHTML = "CP3403 Assignment - Programming Product";
+
+                var tablet2 = ((("<%= tablet2%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var detailed_accuracy = ((("<%= detailed_accuracy%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var vartoadd = ((("<%= tablet%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var correctness = ((("<%= correctness%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var tableToShow = ((("<%= tableToShow%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                var classified = ((("<%= classifiedTableToShow%>")
+                    .replace(/&lt;/g, "<"))
+                    .replace(/&gt;/g, ">"))
+                    .replace(/&#34;/g, "\"");
+
+                $("#correctness").html(correctness);
+                $("#example-jquery-app-output").html(tableToShow);
+                $("#statistics").html(detailed_accuracy);
+                $("#sample-table").html(vartoadd);
+                $("#classifiedTableToShow").html(classified);
+                $("#tablet2").html(tablet2);
+
+            }, 700);
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="h1" id="demo"></h1>
+
+    <h3 id="username-text"><%= name%></h3>
+
+    <div class="alert alert-warning" role="alert">
+        Dear my CP3403 group, please click
+        <form method="get" action="/download">
+            <button type="submit">here</button>
+        </form>
+        to download test file.
+    </div>
+
+    <h2>Box Plot below:</h2>
+    <div id="person1"></div>
+    <script src="./client/src/react.js" type="text/babel"></script>
+
+    <h2>Original dataset:</h2>
+    <div id="data"></div>
+    <div class="table" id="sample-table"></div>
+    <div id="table-to-show"></div>
+
+    <h2>Classified dataset:</h2>
+    <div class="table" id="tablet2"></div>
+
+    <h2>Correctness table:</h2>
+    <div id="correctness" class="table"></div>
+
+    <h2>Likelihood table:</h2>
+    <div id="statistics" class="table"></div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Original</h3>
+            <div id="example-jquery-app-output" class="table"></div>
+        </div>
+        <div class="col-sm-6">
+            <h3>Classified</h3>
+            <div id="classifiedTableToShow" class="table"></div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

@@ -48,7 +48,8 @@ router.get('/', function (req, res, next) {
     });
 
     var table1 = '<h1>HungH1</h1>';
-    res.render('index', {name: 'Waiting', tablet: table1, tableToShow: table1});
+    //res.render('index', {name: 'Waiting', tablet: table1, tableToShow: table1});
+    res.render('public/index.html', {name: 'Waiting', tablet: table1, tableToShow: table1});
 });
 
 router.get('/download', function (req, res, next) {
@@ -122,7 +123,7 @@ router.post('/submit-form', (req, res) => {
                     var html = tableify(csvContentJson);
                     //console.log(html);
 
-                    res.render('contingencytable.html', {
+                    res.render('public/contingencytable.html', {
                         name: 'Uploaded',
                         tablet: tableify(jsonObj),
                         tablet2:tableify(classifiedSet),
